@@ -15,18 +15,17 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ Improved CORS
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://moneedi-app2-bdqy.vercel.app',           // ← remove trailing slash
-    'https://moneedi-app2-bdqy-5xuwtipko-avelarai269-4786s-projects.vercel.app'
+    'https://moneedi-app2-bdqy.vercel.app',
+    'https://moneedi-app2-bdqy-5xuwtipko-avelarai269-4786s-projects.vercel.app',
+    /\.vercel\.app$/,                    // Allows all Vercel preview domains
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-
 // Handle preflight requests
 app.options('*', cors());
 // Trust proxy (important for Render)

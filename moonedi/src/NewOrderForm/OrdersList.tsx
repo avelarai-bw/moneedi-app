@@ -24,7 +24,7 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders, loading, onOrderDeleted
     if (!window.confirm("Are you sure you want to delete this order?")) return;
 
     try {
-      const response = await fetch(`https://moneedi-app.onrender.com/api/orders/${orderId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/${orderId}`, {
         method: 'DELETE',
         credentials: 'include',
       });

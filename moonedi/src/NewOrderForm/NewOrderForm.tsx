@@ -62,7 +62,7 @@ const NewOrderForm: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://moneedi-app.onrender.com/api/order', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

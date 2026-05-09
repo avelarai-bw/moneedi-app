@@ -20,7 +20,7 @@ const CustomerDashboard: React.FC = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await fetch('https://moneedi-app.onrender.com/api/orders', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders`, {
         credentials: 'include',
       });
 
@@ -41,7 +41,7 @@ const CustomerDashboard: React.FC = () => {
   // Fixed Sign Out Function
   const signOut = async () => {
     try {
-      await fetch('https://moneedi-app.onrender.com/api/logout', {   // ← Fixed route
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/logout1`, {   // ← Fixed route
         method: 'POST',
         credentials: 'include',
       });
