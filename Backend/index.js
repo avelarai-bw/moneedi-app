@@ -27,7 +27,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 // Handle preflight requests
-app.options('*', cors());
+
 // Trust proxy (important for Render)
 app.set('trust proxy', 1);
 // Routes
@@ -39,4 +39,8 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+});
+// At the very bottom of your main index.js or router
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
 });
