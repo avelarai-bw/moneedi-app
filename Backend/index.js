@@ -29,6 +29,8 @@ app.use(cors({
 
 // Handle preflight requests
 app.options('*', cors());
+// Trust proxy (important for Render)
+app.set('trust proxy', 1);
 // Routes
 app.use('/api', require('./routes/aiRoutes'));
 app.use('/api', require('./routes/authRoutes'));
