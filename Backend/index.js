@@ -19,8 +19,8 @@ app.use(cookieParser());
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://avelarai.vercel.app',
-    'https://avelarai-git-main-avelarai269-4786s-projects.vercel.app'
+    'https://moneedi-app2-bdqy.vercel.app/',
+    'https://moneedi-app2-bdqy-5xuwtipko-avelarai269-4786s-projects.vercel.app/'
   ],
   credentials: true
 }));
