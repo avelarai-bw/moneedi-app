@@ -81,7 +81,7 @@ const RegistrationForm: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://moneedi-app.onrender.com/api/register', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
