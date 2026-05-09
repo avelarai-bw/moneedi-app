@@ -1,0 +1,117 @@
+/* ServicesBanner.module.css */
+:root {
+    --primary-green: #27AE60;
+    --dark-green: #219653;
+    --white: #FFFFFF;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .banner {
+    width: 100%;
+    background: var(--white);
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  
+  .leftSection {
+    background: var(--white);
+    color: var(--primary-green);
+    width: 25%;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    position: relative;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+    font-weight: 200;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+  
+  .greenSection {
+    background:  linear-gradient(135deg, #0a3d1a 0%, #1b5e2e 100%);;
+    color: var(--white);
+    width: 25%;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+   
+    position: relative;
+  }
+  
+  .slider {
+    text-align: center;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    width: 100%;
+  }
+  
+  .slider.fading {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  
+  .serviceText {
+    font-size: 1rem;
+    font-weight: 200;
+    letter-spacing: 0.05em;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .leftSection,
+    .greenSection {
+      width: 40%;
+      padding: 1rem;
+    }
+  
+    .tagline,
+    .serviceText {
+      font-size: 1.3rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .banner {
+      flex-direction: column;
+    }
+  
+    .leftSection,
+    .greenSection {
+      width: 100%;
+      min-height: 100px;
+      padding: 1rem;
+    }
+  
+    .tagline,
+    .serviceText {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .leftSection,
+    .greenSection {
+      padding: 0.75rem;
+    }
+  
+    .tagline,
+    .serviceText {
+      font-size: 1rem;
+    }
+  }

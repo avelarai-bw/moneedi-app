@@ -1,0 +1,112 @@
+.section {
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #0a3d1a; /* deep green */
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.subheading {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #4a4a4a; /* faint gray-green tone */
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 4rem;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+.card {
+  background: #f8fafc; /* very light off-white */
+  border: 1px solid #d1fae5; /* faint mint border */
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  border-color: #bef264; /* lime on hover */
+  box-shadow: 0 16px 40px rgba(190, 242, 100, 0.18);
+}
+
+.iconWrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1.5rem;
+  background: rgba(190, 242, 100, 0.12); /* very faint lime bg */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  font-size: 2.2rem;
+  color: #1b5e2e; /* medium green */
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0a3d1a;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555555; /* faint dark text */
+  margin: 0;
+}
+
+.cta {
+  margin-top: 5rem;
+  text-align: center;
+  font-size: 1.25rem;
+  color: #4a4a4a;
+}
+
+.ctaButton {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 1rem 2.5rem;
+  background: #bef264;
+  color: #0a3d1a;
+  font-weight: 700;
+  font-size: 1.15rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background: #a3e635;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .heading { font-size: 2.4rem; }
+  .subheading { font-size: 1.15rem; }
+  .card { padding: 2rem 1.5rem; }
+}

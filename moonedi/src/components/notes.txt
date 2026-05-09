@@ -1,0 +1,418 @@
+import { useState, useEffect } from 'react'; // Added useEffect for scroll
+import styles from './NavBar.module.css';
+import logo from '../assets/moonedi-logo-w-bg.png';
+import { Link } from 'react-router-dom';
+import { FaBars, FaTimes, FaUser, FaShoppingCart, FaRobot } from 'react-icons/fa'; // Added icons for actions
+import { motion } from 'framer-motion'; // For elegant dropdowns
+
+const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false); // New: For sticky shrink
+
+  // New: Scroll listener for elegant sticky effect
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
+
+  return (
+    <motion.header // Wrap in motion for global entrance
+      className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className={styles.navbar__logo}>
+        <Link to="/">
+          <img src={logo} alt="Moonedi Enterprise" />
+        </Link>
+      </div>
+
+      <nav className={styles.navbar__nav}>
+        <ul className={styles.navList}>
+          <li><Link to="/" onClick={closeMenu}>Home</Link></li>
+          <li className={styles.dropdown}>
+            <Link to="/about" onClick={closeMenu}>About</Link>
+            <motion.ul // Motion for smooth dropdown
+              className={styles.dropdownMenu}
+              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+              whileHover={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <li><Link to="/abattoir" onClick={closeMenu}>Abattoir</Link></li>
+              <li><Link to="/meat-processing" onClick={closeMenu}>Meat Processing</Link></li>
+              <li><Link to="/distribution" onClick={closeMenu}>Distribution</Link></li>
+            </motion.ul>
+          </li>
+          <li className={styles.dropdown}>
+            <Link to="/customers" onClick={closeMenu}>Our Customers</Link>
+            <motion.ul
+              className={styles.dropdownMenu}
+              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+              whileHover={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <li><Link to="/customers/botswana" onClick={closeMenu}>Botswana</Link></li>
+              <li><Link to="/customers/sadc" onClick={closeMenu}>SADC Region</Link></li>
+              <li><Link to="/customers/europe" onClick={closeMenu}>Europe</Link></li> {/* Highlighted global */}
+            </motion.ul>
+          </li>
+          <li className={styles.dropdown}>
+            <Link to="/standards" onClick={closeMenu}>Standards</Link> {/* Merged Health + Quality */}
+            <motion.ul
+              className={styles.dropdownMenu}
+              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+              whileHover={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <li><Link to="/health/hygiene-policy" onClick={closeMenu}>Hygiene & Safety</Link></li>
+              <li><Link to="/quality/policy" onClick={closeMenu}>Quality Policies</Link></li>
+              <li><Link to="/quality/certificate" onClick={closeMenu}>Certifications</Link></li>
+            </motion.ul>
+          </li>
+          <li><Link to="/product-gallery" onClick={closeMenu}>Health & Hygiene</Link></li> {/* Shortened name */}
+        </ul>
+      </nav>
+
+      {/* Updated: Actions as icon buttons—no desktop hamburger */}
+      <div className={styles.navbar__actions}>
+       
+        <Link to="/order-online" className={styles.actionIcon} title="Place Order" onClick={closeMenu}>
+          <FaShoppingCart />
+        </Link>
+        <Link to="/customer-login" className={styles.actionIcon} title="Login" onClick={closeMenu}>
+          <FaUser />
+        </Link>
+        <button className={styles.askAI__button}>
+          <FaRobot /> AI
+        </button>
+        <button className={styles.hamburger} onClick={toggleMenu}>
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      </div>
+
+      {isOpen && (
+        <motion.div // Motion for mobile slide
+          className={styles.mobileMenu}
+          initial={{ x: '100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '100%' }}
+          transition={{ duration: 0.4 }}
+        >
+          <ul className={styles.mobileNavList}>
+            {/* Mirror desktop structure, but with accordion logic if you add state */}
+            <li><Link to="/" className={styles.mobileMainLink} onClick={closeMenu}>Home</Link></li>
+            <li>
+              <Link to="/about" className={styles.mobileMainLink} onClick={closeMenu}>About</Link>
+              <ul className={styles.mobileSubMenu}>
+                <li><Link to="/abattoir" onClick={closeMenu}>Abattoir</Link></li>
+                <li><Link to="/meat-processing" onClick={closeMenu}>Meat Processing</Link></li>
+                <li><Link to="/distribution" onClick={closeMenu}>Distribution</Link></li>
+              </ul>
+            </li>
+            {/* ... Similar for other mains, with shortened subs ... */}
+            <li className={styles.mobileDivider} />
+            <li><Link to="/order-online" className={styles.mobileActionLink} onClick={closeMenu}>Order Online</Link></li>
+            <li><Link to="/quote-request" className={styles.mobileActionLink} onClick={closeMenu}>Get Quote</Link></li>
+            <li><Link to="/customer-login" className={styles.mobileActionLink} onClick={closeMenu}>Login</Link></li>
+          </ul>
+        </motion.div>
+      )}
+
+      {isOpen && <div className={styles.overlay} onClick={closeMenu} />}
+    </motion.header>
+  );
+};
+
+export default NavBar;
+:root {
+  --primary-green: #2E7D32; /* Muted for elegance */
+  --light-green: #E8F5E8; /* Softer */
+  --dark-green: #1B5E20;
+  --gold-accent: #D4AF37; /* New: For hovers */
+  --text-dark: #2C3E50;
+  --text-light: #7F8C8D;
+  --white: #FFFFFF;
+  --gray-light: #F8F9FA;
+  --shadow-sm: 0 2px 4px rgba(46, 125, 50, 0.1); /* Muted shadow */
+  --shadow-md: 0 8px 25px rgba(46, 125, 50, 0.15);
+  --border-radius: 8px; /* Slightly rounder */
+  --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --font-main: 'Montserrat', sans-serif; /* Add to globals */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem; /* More whitespace */
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  position: sticky; /* New: Sticky top */
+  top: 0;
+  z-index: 100;
+ /* border-bottom: 2px solid var(--primary-green); /* Thinner border */
+  transition: var(--transition);
+}
+
+.navbar.scrolled { /* New: Shrink on scroll */
+  padding: 0.5rem 3rem;
+  border-bottom-width: 1px;
+}
+
+.navbar__logo img {
+  height: 70px; /* Responsive? Add clamp() if needed */
+  width: auto;
+  transition: var(--transition);
+  filter: drop-shadow(0 1px 3px rgba(46, 125, 50, 0.1)); /* Subtler */
+}
+
+.navbar__logo:hover img {
+  transform: scale(1.02); /* Gentler scale */
+}
+
+.navbar__nav {
+  display: flex;
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 2rem; /* Wider gaps for elegance */
+}
+
+.navList > li {
+  position: relative;
+  margin: 0;
+}
+
+.navList a,
+.mobileMainLink {
+  text-decoration: none;
+  color: var(--text-dark); /* Neutral base, not green */
+  font-family: var(--font-main);
+  font-weight: 600; /* Semi-bold */
+  padding: 0.75rem 1rem; /* Lighter padding */
+  display: block;
+  transition: var(--transition);
+  border-radius: var(--border-radius);
+  position: relative;
+  text-transform: none; /* Natural case */
+}
+
+.navList a::after,
+.mobileMainLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gold-accent); /* Gold for premium */
+  transition: var(--transition);
+  transform: translateX(-50%);
+}
+
+.navList a:hover,
+.mobileMainLink:hover {
+  color: var(--primary-green);
+  background: transparent; /* No bg—clean */
+}
+
+.navList a:hover::after,
+.mobileMainLink:hover::after {
+  width: 100%;
+}
+
+/* Dropdowns—refined with motion-ready classes */
+.dropdown {
+  position: relative;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px; /* Slimmer */
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--light-green);
+  list-style: none;
+  padding: 0.5rem 0; /* Tighter */
+  margin: 0.25rem 0 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95) translateY(-10px); /* Scale for elegance */
+  transition: var(--transition);
+  z-index: 1000;
+}
+
+.dropdown:hover .dropdownMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0);
+}
+
+.dropdownMenu li {
+  margin: 0;
+}
+
+.dropdownMenu a {
+  padding: 0.75rem 1.5rem; /* Balanced */
+  border-bottom: 1px solid var(--light-green);
+  white-space: nowrap;
+  position: relative;
+  font-weight: 400; /* Lighter subs */
+}
+
+.dropdownMenu a::before {
+  content: '•'; /* Simpler bullet */
+  position: absolute;
+  left: 0.75rem;
+  color: var(--gold-accent);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.dropdownMenu a:hover {
+  background: var(--light-green);
+  color: var(--primary-green);
+  padding-left: 1.75rem; /* Shift on hover */
+}
+
+.dropdownMenu a:hover::before {
+  opacity: 1;
+  left: 0.5rem;
+}
+
+.dropdownMenu a:last-child {
+  border-bottom: none;
+}
+
+/* Actions: Now icon-focused */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Tighter for icons */
+}
+
+.actionIcon { /* New: For quick action links */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--light-green);
+  color: var(--primary-green);
+  border: none;
+  border-radius: 50%; /* Circular for modern */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.actionIcon:hover {
+  background: var(--primary-green);
+  color: var(--white);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-sm);
+}
+
+.askAI__button {
+ background: #bef264;
+  color: #0a3d1a;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Space icon/text */
+  font-size: 0.9rem;
+}
+
+.askAI__button::before { /* Shimmer kept, but subtler */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.6s;
+}
+
+.askAI__button:hover {
+  transform: translateY(-1px); /* Gentler lift */
+  box-shadow: var(--shadow-md);
+}
+
+.askAI__button:hover::before {
+  left: 100%;
+}
+
+.hamburger {
+  display: none; /* Same as before */
+  /* ... keep existing ... */
+}
+
+/* Mobile: Add accordion state if desired (e.g., via sub-state), but kept simple */
+.mobileMenu {
+  /* ... existing, but add: */
+  padding: 2rem 1.5rem; /* More breathing room */
+}
+
+
+
+/* Overlay & Responsive—mostly unchanged, but: */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+
+  .navbar__nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .actionIcon {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .askAI__button {
+    padding: 0.625rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .actionIcon { display: flex; } /* Show on desktop */
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .navbar__logo img {
+    height: 50px;
+  }
+}

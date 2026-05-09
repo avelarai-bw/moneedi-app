@@ -1,0 +1,50 @@
+.metrics {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #0a3d1a 0%, #1b5e2e 100%); /* Deep forest green gradient */
+  color: #f0fdf4; /* Very light mint for readability */
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem 2rem;
+}
+
+.metricItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.number {
+  font-size: 3.8rem;
+  font-weight: 800;
+  color: #bef264; /* Bright lime-green — stands out elegantly */
+  letter-spacing: -1px;
+  line-height: 1;
+  margin: 0;
+}
+
+.label {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #d1fae5; /* Soft mint */
+  margin: 0;
+  opacity: 0.95;
+  max-width: 240px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .number {
+    font-size: 2.8rem;
+  }
+
+  .label {
+    font-size: 1.1rem;
+  }
+}

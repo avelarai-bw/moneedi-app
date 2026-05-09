@@ -1,0 +1,129 @@
+.pageContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0f2e9 100%);
+  padding: 2rem 1rem;
+}
+
+.formWrapper {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 520px;
+  border: 1px solid #d1fae5;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0a3d1a;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #555;
+  margin-bottom: 2.5rem;
+  font-size: 1.05rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.inputGroup {
+  flex: 1;
+  min-width: 220px;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #1b5e2e;
+  font-size: 0.95rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #d1fae5;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #bef264;
+  box-shadow: 0 0 0 3px rgba(190, 242, 100, 0.15);
+}
+
+.inputError {
+  border-color: #ef4444 !important;
+}
+
+.errorText {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+  display: block;
+}
+
+.submitButton {
+  background: #bef264;
+  color: #0a3d1a;
+  font-weight: 700;
+  font-size: 1.15rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submitButton:hover {
+  background: #a3e635;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(190, 242, 100, 0.3);
+}
+
+.loginLink {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.loginLink a {
+  color: #1b5e2e;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.loginLink a:hover {
+  color: #0a3d1a;
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .row {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+}

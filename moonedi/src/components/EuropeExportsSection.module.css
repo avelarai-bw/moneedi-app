@@ -1,0 +1,118 @@
+/* EuropeExportsSection.module.css */
+.section {
+  padding: 6rem 1rem;
+  background: linear-gradient(135deg, #e0f2e9 0%, #f8fafc 100%);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.step {
+  font-size: 4.8rem;
+  font-weight: 800;
+  color: #bef264;
+  opacity: 0.12;
+  line-height: 1;
+  margin-bottom: -2rem;
+}
+
+.title {
+  font-size: 2.7rem;
+  font-weight: 800;
+  color: #0a3d1a;
+  margin-bottom: 0.8rem;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #1b5e2e;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+.imageWrapper {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.imageWrapper:hover .image {
+  transform: scale(1.05);
+}
+
+.textContent {
+  text-align: left;
+}
+
+.textContent h3 {
+  font-size: 1.55rem;
+  color: #0a3d1a;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.customerList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.customerList li {
+  padding: 0.95rem 0 0.95rem 2.6rem;
+  position: relative;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: #333;
+}
+
+.customerList li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #bef264;
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.benefit {
+  background: #f0f9e8;
+  padding: 1.6rem 1.8rem;
+  border-left: 6px solid #bef264;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  color: #1b5e2e;
+  line-height: 1.6;
+  margin-top: 2rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .step { font-size: 4rem; }
+  .title { font-size: 2.3rem; }
+}

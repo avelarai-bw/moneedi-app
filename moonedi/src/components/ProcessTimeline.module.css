@@ -1,0 +1,118 @@
+.section {
+  padding: 6rem 2rem;
+  background-color: #ffffff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #0a3d1a;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.subheading {
+  font-size: 1.3rem;
+  color: #4a4a4a;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+}
+
+.timeline {
+  position: relative;
+  /* Vertical line on desktop */
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: linear-gradient(to bottom, #d1fae5, #bef264);
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.step:nth-child(even) {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.number {
+  width: 80px;
+  height: 80px;
+  background: #1b5e2e;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.content {
+  flex: 1;
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #d1fae5;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.title {
+  font-size: 1.6rem;
+  color: #1b5e2e;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+.image {
+  margin-top: 1.5rem;
+  width: 100%;
+  max-height: 220px;          /* Keeps it compact */
+  object-fit: cover;          /* Crops nicely without distortion */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #d1fae5;  /* Subtle green border */
+}
+
+/* Optional: Hover zoom for elite feel */
+.image:hover {
+  transform: scale(1.03);
+  transition: transform 0.3s ease;
+}
+
+/* Mobile: Stack vertically */
+@media (max-width: 768px) {
+  .timeline::before { left: 40px; }
+  .step { flex-direction: column; text-align: left; }
+  .step:nth-child(even) { flex-direction: column; text-align: left; }
+  .number { margin-bottom: 1rem; }
+}

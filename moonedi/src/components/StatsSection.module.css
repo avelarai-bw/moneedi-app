@@ -1,0 +1,116 @@
+:root {
+  --primary-green: #2E7D32; /* Muted emerald for elegance (was brighter #27AE60) */
+  --dark-green: #1B5E20;
+  --gold-accent: #D4AF37; /* New: Premium warmth */
+  --white: #FFFFFF;
+  --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Slightly longer for grace */
+}
+
+.banner {
+  width: 100%;
+  background: linear-gradient(to right, var(--white) 0%, #F5F5F5 100%); /* Subtle fade for depth */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  padding: 0.5rem 2rem; /* Added side padding for breathing room */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Soft drop shadow for lift */
+}
+
+.leftSection {
+  background: transparent; /* Remove white bg—blend seamlessly */
+  color: var(--primary-green);
+  width: 40%; /* Expanded: More room for tagline */
+  min-height: 40px; /* Taller for balance */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Left-align for reading flow */
+  padding: 0 1rem;
+}
+
+.tagline {
+  font-family: 'Playfair Display', serif; /* Elegant serif—add to globals */
+  font-size: clamp(1rem, 2.5vw, 1.2rem); /* Fluid scaling */
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.1em;
+  margin: 0;
+  line-height: 1.3;
+  border-left: 2px solid var(--gold-accent); /* Subtle accent line */
+  padding-left: 1rem;
+}
+
+.greenSection {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+  color: var(--white);
+  width: 60%; /* Expanded: Dominates for impact */
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  /* Optional: Faint global icon overlay */
+  /* background-image: url('/world-map-faint.svg'); background-size: cover; opacity: 0.1; */
+}
+
+.slider {
+  text-align: center;
+  width: 100%;
+}
+
+.icon { /* New: Icon styling */
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.serviceText {
+  font-family: 'Inter', sans-serif; /* Clean modern—add to globals */
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  font-weight: 400; /* Bolder for hierarchy (was 200) */
+  letter-spacing: 0.05em;
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Deeper shadow for contrast */
+}
+
+/* Responsive—refined for fluidity */
+@media (max-width: 1024px) {
+  .banner {
+    padding: 0.5rem 1rem;
+  }
+  
+  .leftSection { width: 45%; }
+  .greenSection { width: 55%; }
+}
+
+@media (max-width: 768px) {
+  .banner {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .leftSection,
+  .greenSection {
+    width: 100%;
+    justify-content: center; /* Center on mobile */
+    min-height: 50px;
+  }
+
+  .tagline {
+    text-align: center;
+    border-left: none;
+    border-bottom: 2px solid var(--gold-accent);
+    padding: 0 0 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tagline,
+  .serviceText {
+    font-size: 1rem;
+  }
+  
+  .icon { font-size: 1.25rem; }
+}

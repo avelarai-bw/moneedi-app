@@ -1,0 +1,128 @@
+.pageContainer {
+  min-height: 100vh;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.formWrapper {
+  background: white;
+  max-width: 680px;
+  width: 100%;
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 10px 40px rgba(10, 61, 26, 0.08);
+  border: 1px solid #d1fae5;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #0a3d1a;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #475569;
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+/* Form Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup label {
+  font-weight: 600;
+  color: #1b5e2e;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.inputGroup input,
+.inputGroup select,
+.inputGroup textarea {
+  padding: 14px 16px;
+  border: 1.5px solid #d1fae5;
+  border-radius: 10px;
+  font-size: 1.02rem;
+  transition: all 0.3s ease;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus,
+.inputGroup textarea:focus {
+  outline: none;
+  border-color: #0a3d1a;
+  box-shadow: 0 0 0 3px rgba(190, 242, 100, 0.2);
+}
+
+.inputError {
+  border-color: #ef4444 !important;
+}
+
+/* Error Text */
+.errorText {
+  color: #ef4444;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+/* Submit Button */
+.submitButton {
+  margin-top: 1rem;
+  padding: 16px;
+  background: #bef264;
+  color: #0a3d1a;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover {
+  background: #a3e635;
+  transform: translateY(-2px);
+}
+
+.submitButton:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .formWrapper {
+    padding: 2rem 1.5rem;
+  }
+
+  .title {
+    font-size: 2.1rem;
+  }
+}
