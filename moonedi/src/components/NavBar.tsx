@@ -18,6 +18,14 @@ const NavBar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock page scroll while the mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => {
     setIsOpen(false);
@@ -162,104 +170,128 @@ const NavBar = () => {
         
        
         
-        <button className={styles.hamburger} onClick={toggleMenu}>
+        <button
+          type="button"
+          className={styles.hamburger}
+          onClick={toggleMenu}
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isOpen}
+        >
           {isOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
 
       {/* ──────────────────────────────────────────────── */}
-      {/*               MOBILE MENU – kept exactly as you had               */}
+      {/*                    MOBILE MENU                    */}
       {/* ──────────────────────────────────────────────── */}
-      {isOpen && (
-        <motion.div
-          className={styles.mobileMenu}
-          initial={{ x: '100%' }}
-          animate={{ x: 0 }}
-          exit={{ x: '100%' }}
-          transition={{ duration: 0.4 }}
-        >
-          <ul className={styles.mobileNavList}>
-            <li>
-              <Link to="/" className={styles.mobileMainLink} onClick={closeMenu}>
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className={styles.mobileMainLink} onClick={closeMenu}>
-                About
-              </Link>
-              <ul className={styles.mobileSubMenu}>
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              key="overlay"
+              className={styles.overlay}
+              onClick={closeMenu}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+
+            <motion.div
+              key="mobile-menu"
+              className={styles.mobileMenu}
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <ul className={styles.mobileNavList}>
                 <li>
-                  <Link to="/abattoir" onClick={closeMenu}>Abattoir</Link>
+                  <Link to="/" className={styles.mobileMainLink} onClick={closeMenu}>
+                    Home
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/meat-processing" onClick={closeMenu}>Meat Processing</Link>
+                  <Link to="/about" className={styles.mobileMainLink} onClick={closeMenu}>
+                    About
+                  </Link>
+                  <ul className={styles.mobileSubMenu}>
+                    <li>
+                      <Link to="/abattoir" onClick={closeMenu}>Abattoir</Link>
+                    </li>
+                    <li>
+                      <Link to="/meat-processing" onClick={closeMenu}>Meat Processing</Link>
+                    </li>
+                    <li>
+                      <Link to="/distribution" onClick={closeMenu}>Distribution</Link>
+                    </li>
+                  </ul>
                 </li>
                 <li>
-                  <Link to="/distribution" onClick={closeMenu}>Distribution</Link>
+                  <Link to="/customers" className={styles.mobileMainLink} onClick={closeMenu}>
+                    Our Customers
+                  </Link>
+                  <ul className={styles.mobileSubMenu}>
+                    <li>
+                      <Link to="/customers/botswana" onClick={closeMenu}>Botswana</Link>
+                    </li>
+                    <li>
+                      <Link to="/customers/sadc" onClick={closeMenu}>SADC Region</Link>
+                    </li>
+                    <li>
+                      <Link to="/customers/europe" onClick={closeMenu}>Europe</Link>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <Link to="/standards" className={styles.mobileMainLink} onClick={closeMenu}>
+                    Standards
+                  </Link>
+                  <ul className={styles.mobileSubMenu}>
+                    <li>
+                      <Link to="/health/hygiene-policy" onClick={closeMenu}>Hygiene & Safety</Link>
+                    </li>
+                    <li>
+                      <Link to="/quality/policy" onClick={closeMenu}>Quality Policies</Link>
+                    </li>
+                    <li>
+                      <Link to="/quality/certificate" onClick={closeMenu}>Certifications</Link>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <Link to="/product-gallery" className={styles.mobileMainLink} onClick={closeMenu}>
+                    Health & Hygiene
+                  </Link>
+                </li>
+
+                <li className={styles.mobileDivider} />
+
+                <li>
+                  <Link to="/order-online" className={styles.mobileActionLink} onClick={closeMenu}>
+                    Order Online
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/quote-request" className={styles.mobileActionLink} onClick={closeMenu}>
+                    Get Quote
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/customer-login" className={styles.mobileActionLink} onClick={closeMenu}>
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/admins-only" className={styles.mobileActionLink} onClick={closeMenu}>
+                    Admins
+                  </Link>
                 </li>
               </ul>
-            </li>
-            <li>
-              <Link to="/customers" className={styles.mobileMainLink} onClick={closeMenu}>
-                Our Customers
-              </Link>
-              <ul className={styles.mobileSubMenu}>
-                <li>
-                  <Link to="/customers/botswana" onClick={closeMenu}>Botswana</Link>
-                </li>
-                <li>
-                  <Link to="/customers/sadc" onClick={closeMenu}>SADC Region</Link>
-                </li>
-                <li>
-                  <Link to="/customers/europe" onClick={closeMenu}>Europe</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link to="/standards" className={styles.mobileMainLink} onClick={closeMenu}>
-                Standards
-              </Link>
-              <ul className={styles.mobileSubMenu}>
-                <li>
-                  <Link to="/health/hygiene-policy" onClick={closeMenu}>Hygiene & Safety</Link>
-                </li>
-                <li>
-                  <Link to="/quality/policy" onClick={closeMenu}>Quality Policies</Link>
-                </li>
-                <li>
-                  <Link to="/quality/certificate" onClick={closeMenu}>Certifications</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link to="/product-gallery" className={styles.mobileMainLink} onClick={closeMenu}>
-                Health & Hygiene
-              </Link>
-            </li>
-
-            <li className={styles.mobileDivider} />
-
-            <li>
-              <Link to="/order-online" className={styles.mobileActionLink} onClick={closeMenu}>
-                Order Online
-              </Link>
-            </li>
-            <li>
-              <Link to="/quote-request" className={styles.mobileActionLink} onClick={closeMenu}>
-                Get Quote
-              </Link>
-            </li>
-            <li>
-              <Link to="/customer-login" className={styles.mobileActionLink} onClick={closeMenu}>
-                Login
-              </Link>
-            </li>
-          </ul>
-        </motion.div>
-      )}
-
-      {isOpen && <div className={styles.overlay} onClick={closeMenu} />}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 };

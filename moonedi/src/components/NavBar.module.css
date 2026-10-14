@@ -26,7 +26,7 @@ a{
   position: sticky; /* New: Sticky top */
   top: 0;
   z-index: 100;
- /* border-bottom: 2px solid var(--primary-green); /* Thinner border */
+ /* border-bottom: 2px solid var(--primary-green); Thinner border */
   transition: var(--transition);
 }
 
@@ -235,23 +235,139 @@ a{
   left: 100%;
 }
 
+/* ─── Hamburger (hidden on desktop, shown ≤1024px below) ─── */
 .hamburger {
-  display: none; /* Same as before */
-  /* ... keep existing ... */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-dark);
+  font-size: 1.4rem;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  position: relative;
+  z-index: 1002; /* stays above the drawer so the X is always tappable */
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Mobile: Add accordion state if desired (e.g., via sub-state), but kept simple */
+.hamburger:hover {
+  color: var(--primary-green);
+  background: var(--light-green);
+}
+
+/* ─── Mobile drawer ─── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 61, 26, 0.45);
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+}
+
 .mobileMenu {
-  /* ... existing, but add: */
-  padding: 2rem 1.5rem; /* More breathing room */
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  height: 100dvh; /* accounts for mobile browser toolbars */
+  width: 85%;
+  max-width: 360px;
+  background: var(--white);
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 5rem 1.5rem 2rem; /* top space clears the close button */
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
 }
 
+.mobileNavList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
 
+.mobileNavList > li {
+  margin: 0;
+}
 
-/* Overlay & Responsive—mostly unchanged, but: */
+.mobileMainLink {
+  font-size: 1.05rem;
+  padding: 0.85rem 0.75rem;
+}
+
+/* Underline animation looks odd on full-width drawer links */
+.mobileMainLink::after {
+  display: none;
+}
+
+.mobileSubMenu {
+  list-style: none;
+  margin: 0 0 0.5rem 0.75rem;
+  padding: 0 0 0 0.75rem;
+  border-left: 2px solid var(--light-green);
+}
+
+.mobileSubMenu a {
+  display: block;
+  padding: 0.6rem 0.75rem;
+  color: var(--text-light);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 400;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.mobileSubMenu a:hover,
+.mobileSubMenu a:active {
+  color: var(--primary-green);
+  background: var(--light-green);
+}
+
+.mobileDivider {
+  height: 1px;
+  background: var(--light-green);
+  margin: 1rem 0;
+}
+
+.mobileActionLink {
+  display: block;
+  text-align: center;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--border-radius);
+  background: var(--light-green);
+  color: var(--primary-green);
+  font-family: var(--font-main);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.mobileActionLink:hover,
+.mobileActionLink:active {
+  background: var(--primary-green);
+  color: var(--white);
+}
+
+/* ─── Responsive ─── */
 @media (max-width: 1024px) {
   .navbar {
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .navbar.scrolled {
+    padding: 0.5rem 1.5rem;
   }
 
   .navbar__nav {
@@ -259,7 +375,7 @@ a{
   }
 
   .hamburger {
-    display: block;
+    display: flex;
   }
 
   .actionIcon {
@@ -276,15 +392,36 @@ a{
 
 @media (min-width: 1025px) {
   .actionIcon { display: flex; } /* Show on desktop */
+
+  /* Safety: never show the drawer on desktop if the window is resized */
+  .mobileMenu,
+  .overlay {
+    display: none;
+  }
+}
+
+/* Phones: Admins moves into the drawer to keep the header uncrowded */
+@media (max-width: 640px) {
+  .askAI__button {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
   .navbar {
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar.scrolled {
+    padding: 0.5rem 1rem;
   }
 
   .navbar__logo img {
-    height: 50px;
+    height: 48px;
+  }
+
+  .navbar__actions {
+    gap: 0.35rem;
   }
 }
 
@@ -318,15 +455,6 @@ a{
 .arrowUp {
   transform: rotate(180deg);
 }
-
-/* Remove hover behavior from dropdown 
-.dropdown:hover .dropdownMenu {
-  /* 
-  
-  Do NOT show on hover anymore – we use click now */
-
-
-
 
 /* Optional: stronger hover feedback on arrow */
 .dropdownToggle:hover .dropdownArrow {
